@@ -94,17 +94,17 @@ Para finalizar, coloque ambas as chaves no diretório `src/main/resources`, essa
 
 #### Executando:
 No diretório da aplicação, abra o terminal e digite:
-```
-mvn clean package               # Para buildar a aplicação em um .jar
-docker-compose build            # Para buildar o docker-compose usando o Dockerfile
-docker-compose up               # Para subir os containers
+```bash
+  mvn clean package               # Para buildar a aplicação em um .jar
+  docker-compose build            # Para buildar o docker-compose usando o Dockerfile
+  docker-compose up               # Para subir os containers
 ```
 ---
 
 ### JSON Request esperados na API e Responses
 Para facilitar o trabalho de testes, vou especificar os JSON que são esperados no sistema, você também pode visualizar exatamente como é o **Data Transfer Object** no package `dtos` em `br/devdeloop/uepb/dtos`:
 #### Register Request:
-```
+```json
 {
   "username": "username",
   "password": "password",
@@ -112,7 +112,7 @@ Para facilitar o trabalho de testes, vou especificar os JSON que são esperados 
 }
 ```
 #### Login Request:
-```
+```json
 {
   "username": "username",
   "password": "password",
@@ -120,7 +120,7 @@ Para facilitar o trabalho de testes, vou especificar os JSON que são esperados 
 }
 ```
 #### Ship Container Request
-```
+```json
 {
   "id": "id",
   "pusher": "PusherEnum",
@@ -149,7 +149,7 @@ A aplicação tem um sistema de autorização por `ROLE`, por padrão, a aplica�
 | N/A           | `POST`                | `/auth/**`                                         |  
 | _`DEVELOPER`_ | `GET`, `POST`         | `/dev/**` + Permissão em todos os outros ENDPOINTS |                           
 | _`CONSULTER`_ | `GET`                 | `/consult/**`                                      |       
-| _`CREW`_      | `POST`,               | `/crew/**`                                         |  
+| _`CREW`_      | `POST`                | `/crew/**`                                         |  
 
 
 #### Endpoints:
@@ -168,16 +168,16 @@ Implementei o `Prometheus` para o gerenciamento de recursos para tomar minhas de
 
 #### Como usar (apenas Linux):
 Na pasta do projeto, você vai encontrar o diretório `/prometheus`, para acessar, abra o terminal e digite:
-```
-cd prometheus
+```bash
+  cd prometheus
 ```
 Em seguida, descompacte o `.zip` do `Prometheus` digitando no terminal:
-```
-unzip prometheus.zip
+```bash
+  unzip prometheus.zip
 ```
 Depois execute o script usando:
-```
-./start.sh
+```bash
+  ./start.sh
 ```
 Ele vai inicializar o `Prometheus` na porta 9090, que captura logs enviados no endpoint `/actuator/**` que podem ser lidos e traduzidos para gráficos.\
 Você pode acessar as estatíscas em:
@@ -191,8 +191,8 @@ Adicione Queries personalizadas para pegar informações específicas da aplica�
 | Uso de CPU             | ` system_cpu_usage `      | Uso de CPU na aplicação |
 
 Lembre-se de encerrar o `Prometheus`, no mesmo diretório (`/prometheus`), abra o terminal e execute o script:
-```
-./stop.sh
+```bash
+  ./stop.sh
 ```
 
 ---
