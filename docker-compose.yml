@@ -1,0 +1,22 @@
+version: '2.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    cpus: 0.5
+    mem_limit: 260m
+    env_file:
+      - .env
+
+  database:
+    image: postgres
+    cpus: 0.25
+    mem_limit: 212m
+    env_file:
+      - .env

@@ -1,0 +1,10 @@
+/target/
+src/main/resources/jwt.rsa.priv
+src/main/resources/jwt.rsa.pub
+.env
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
