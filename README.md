@@ -20,7 +20,7 @@ Projeto inicialmente feito para uso real de uma empresa de cargas fluviais no br
 3. Sistemas de autorização com validação de roles com **OAuth2**.
 4. Encapsulamento da API com **Spring Security** para proteção de requests externos.
 5. Aprimoramento de meu conhecimento sobre arquiteturas de camadas.
-6. Deploy usando **AWS**, apesar de não ter ido pra frente, tive que aprender pois era uma possibilida real (mais detalhes em Observações e curiosidades).
+6. Deploy usando **AWS**, apesar de não ter ido pra frente, tive que aprender pois era uma possibilidade real (mais detalhes em Observações e curiosidades).
 
 ---
 
@@ -76,7 +76,7 @@ POSTGRES_PASSWORD=
 #### Gerando chaves `RSA`:
 Gere duas RSA keys (2048 bits), uma pública e outra privada, lembrando que a **chave pública** é feita a partir da **chave privada**, pois são conectadas para fazer a operação de criptografia e descriptografia, se atente nesse detalhe ao gerar.\
 \
-Elas deve, seguir esse formato:
+Elas devem seguir esse formato:
 ```
 -----BEGIN PRIVATE KEY-----
 // sua chave privada vem aqui.
@@ -90,7 +90,7 @@ Elas deve, seguir esse formato:
 
 Em seguida, renomeie a sua **chave privada** como `jwt.rsa.priv` e sua **chave pública** como `jwt.rsa.pub`\
  \
-Para finalizar, coloque ambas as chaves no diretório `src/main/resources`, essa estapa é importante, pois o referenciamento das chaves no `application.properties` depende de ambas estar nessa pasta.
+Para finalizar, coloque ambas as chaves no diretório `src/main/resources`, essa etapa é importante, pois o referenciamento das chaves no `application.properties` depende de ambas estar nessa pasta.
 
 #### Executando:
 No diretório da aplicação, abra o terminal e digite:
@@ -116,7 +116,7 @@ Para facilitar o trabalho de testes, vou especificar os JSON que são esperados 
 {
   "username": "username",
   "password": "password",
-  "role": "c"
+  "role": "AppUserEnum"
 }
 ```
 #### Ship Container Request
@@ -171,12 +171,15 @@ Na pasta do projeto, você vai encontrar o diretório `/prometheus`, para acessa
 ```
 cd prometheus
 ```
-Em seguida, execute o script usando:
+Em seguida, descompacte o `.zip` do `Prometheus` digitando no terminal:
+```
+unzip prometheus.zip
+```
+Depois execute o script usando:
 ```
 ./start.sh
 ```
-Eles vão inicializar o `Prometheus` e  o `Node_Exporter`, o `Prometheus` captura logs enviados no endpoint `/actuator/**`, e o `Node_Exporter` captura estatisticas internas do host (Uso de CPU, uso de memória, uso de disco...), estava usando quando estava testando localmente, os valores não refletem ao consumo da aplicação que é executada no **container** em `Docker`.\
-\
+Ele vai inicializar o `Prometheus` na porta 9090, que captura logs enviados no endpoint `/actuator/**` que podem ser lidos e traduzidos para gráficos.\
 Você pode acessar as estatíscas em:
 _[Prometheus Queries](http://localhost:9090/query)_.\
 \
@@ -187,7 +190,7 @@ Adicione Queries personalizadas para pegar informações específicas da aplica�
 | Memória usada pela JVM | `jvm_memory_used_bytes `  | Memória usada pela JVM  |
 | Uso de CPU             | ` system_cpu_usage `      | Uso de CPU na aplicação |
 
-Lembre-se de encerrar o `Prometheus` e  o `Node_Explorer`, no mesmo diretório (`/prometheus`), abra o terminal e execute o script:
+Lembre-se de encerrar o `Prometheus`, no mesmo diretório (`/prometheus`), abra o terminal e execute o script:
 ```
 ./stop.sh
 ```
@@ -195,6 +198,6 @@ Lembre-se de encerrar o `Prometheus` e  o `Node_Explorer`, no mesmo diretório (
 ---
 
 ### Observações finais e curiosidades
-Foi um projeto de muito aprendizado, fico feliz que eu consegui fazer o protótipo de algo que teve a chance de rodar de verdade algum dia, uma curiosidade, no arquivo `docker-compose.yml`, vai ter limitações de hardware bem severas, pois ele foi projetado para rodar no `Lightsail` na **AWS**, com o plano mais barato, mas que supria a demanda esperada, **512mb** de ram e **1 CPU** para tentar rodar **3 containers** é um pouco ousado, o 3º container seria para rodar `NGINX`, assim totalizando os **3 containers** (atualmente só tem 2).\
+Foi um projeto de muito aprendizado, fico feliz que eu consegui fazer o protótipo de algo que teve a chance de rodar de verdade algum dia, uma curiosidade, no arquivo `docker-compose.yml`, vai ter limitações de hardware bem severas, pois ele foi projetado para rodar no `Lightsail` na **AWS**, com o plano mais barato, mas que supria a demanda esperada, **512mb** de ram e **1 CPU** para tentar rodar **3 containers** é um pouco ousado, o terceiro container seria para rodar `NGINX`, assim totalizando os **3 containers** (atualmente só tem 2).\
 Fiz testes de carga usando o `Prometheus` para gerenciar o uso de recursos do projeto, reservei **260mb** para a API, a `JVM` usava entre **140mb** - **170mb**, sobrando **212mb** para o PostgreSQL e fica **40mb** não usados, que seria para o `NGINX`, e como iriam receber poucos request, e a API tem o `Spring Security` implementados, evitaria ao máximo a sobrecarga, mas o maior limitador seria o número de **CPU**, ter que dividir **1 thread** para **3 containers** seria um desafio, mas em um ambiente mais controlado e com poucas requisições no dia, com as medidas que tomei, acredito que seria possível.\
 Planejava colocar mais endpoints, como algum para remover as cargas, mas como o projeto não foi pra frente, não vejo mais sentido em polir ele, e não é como se eu não soubesse fazer, só iria gastar mais tempo e para provar um conhecimento que eu sei que tenho, enfim, foi muito bom esse projeto.
