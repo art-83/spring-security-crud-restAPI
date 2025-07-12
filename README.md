@@ -144,7 +144,7 @@ To make testing easier, here's a list of expected JSON formats. You can also see
 {
   "id": "id",
   "pusher": "PusherEnum",
-  "shipQuantity": shipQuantity,
+  "shipQuantity": "shipQuantity",
   "branchExitDateTime": "branchExitDateTime",
   "destinationArrivalDateTime": "destinationArrivalDateTime",
   "destinationExitDateTime": "destinationExitDateTime",

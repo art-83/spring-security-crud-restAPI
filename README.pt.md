@@ -124,7 +124,7 @@ Para facilitar o trabalho de testes, vou especificar os JSON que são esperados 
 {
   "id": "id",
   "pusher": "PusherEnum",
-  "shipQuantity": shipQuantity,
+  "shipQuantity": "shipQuantity",
   "branchExitDateTime": "branchExitDateTime",
   "destinationArrivalDateTime": "destinationArrivalDateTime",
   "destinationExitDateTime": "destinationExitDateTime",
