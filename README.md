@@ -7,6 +7,7 @@
 - [Tecnologias usadas](#tecnologias-usadas)
 - [Estrutura dos packages](#estrutura-dos-packages)
 - [Como executar a aplicação](#como-executar-a-aplicação)
+- [JSON Request esperados na API e Responses](#json-request-esperados-na-api-e-responses)
 - [Permissões e endpoints](#permissões-e-endpoints)
 - [Gerenciar uso de recursos com o Prometheus](#gerenciar-uso-de-recursos-com-o-prometheus)
 - [Observações finais e curiosidades](#observações-finais-e-curiosidades)
@@ -34,7 +35,7 @@ Projeto inicialmente feito para uso real de uma empresa de cargas fluviais no br
 
 ---
 
-### Estutura dos packages
+### Estrutura dos packages
 br.devdeloop.uepb\
 ├── 🗀 controllers\
 ├── 🗀 dtos\
@@ -100,17 +101,55 @@ docker-compose up               # Para subir os containers
 ```
 ---
 
+### JSON Request esperados na API e Responses
+Para facilitar o trabalho de testes, vou especificar os JSON que são esperados no sistema, você também pode visualizar exatamente como é o **Data Transfer Object** no package `dtos` em `br/devdeloop/uepb/dtos`:
+#### Register Request:
+```
+{
+  "username": "username",
+  "password": "password",
+  "role": "AppUserEnum"
+}
+```
+#### Login Request:
+```
+{
+  "username": "username",
+  "password": "password",
+  "role": "c"
+}
+```
+#### Ship Container Request
+```
+{
+  "id": "id",
+  "pusher": "PusherEnum",
+  "shipQuantity": shipQuantity,
+  "branchExitDateTime": "branchExitDateTime",
+  "destinationArrivalDateTime": "destinationArrivalDateTime",
+  "destinationExitDateTime": "destinationExitDateTime",
+  "branchArrivalDateTime": "branchArrivalDateTime",
+  "observation": "observation",
+  "status": "StatusEnum"
+}
+```
+> [ _**IMPORTANTE**_ ]
+> Todos os valores quem tem 'Enum' devem corresponder exatamente ao valor do Enum na aplicação.\
+> _Exemplo_: "role": "_DEVELOPER_"\
+> Pois no **Enum** `AppUserEnum`, a role é escrita exatamente como: `DEVELOPER`, a aplicação é **case-sensitive**, então garanta que a **role** seja exatamente igual ao **Enum**.
+---
+
 ### Permissões e endpoints
-A aplicação tem um sistema de autorização por `ROLE`, por padrão, a aplicação vem com um `DEVELOPER` já cadastrado username = `admin`, password = `admin` veja as permissões de acordo com essa tabela:
+A aplicação tem um sistema de autorização por `ROLE`, por padrão, a aplicação vem com um `DEVELOPER` já cadastrado username = `admin`, password = `admin`, use-o em `/auth/login` para conseguir um **Token** para validar as próximas requisições, **cada Token é válido por 1h**, `/auth/login` não precisa de permissões para acessar, ou seja, **não precisa de Token no Header do request**, veja as permissões de acordo com essa tabela:
 
 #### Permissões:
 
-| ROLE        | PROTOCOLOS PERMITIDOS | ENDPOINTS PERMISSÕES                               |
-|-------------|-----------------------|----------------------------------------------------|
-| N/A         | `POST`                | `/auth/**`                                         |  
+| ROLE          | PROTOCOLOS PERMITIDOS | ENDPOINTS PERMISSÕES                               |
+|---------------|-----------------------|----------------------------------------------------|
+| N/A           | `POST`                | `/auth/**`                                         |  
 | _`DEVELOPER`_ | `GET`, `POST`         | `/dev/**` + Permissão em todos os outros ENDPOINTS |                           
 | _`CONSULTER`_ | `GET`                 | `/consult/**`                                      |       
-| _`CREW`_      | `POST`, `DELETE`      | `/crew/**`                                         |  
+| _`CREW`_      | `POST`,               | `/crew/**`                                         |  
 
 
 #### Endpoints:
