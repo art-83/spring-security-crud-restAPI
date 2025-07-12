@@ -47,7 +47,7 @@ br.devdeloop.uepb\
 ├── 🗀 security\
 ├── 🗀 services\
 ├── 🗀 util\
-└── ©️ ArthurNicolasApplication
+└── ©️ UepbApiApplication
 
 ___
 
@@ -56,7 +56,13 @@ ___
 - Docker
 - Docker-compose
 
-> [AVISO]
+#### Clonando o repositório:
+Em um diretório vazio, abra o terminal e digite:
+```bash
+  git clone https://github.com/art-83/spring-security-crud-restAPI
+```
+
+> [ AVISO ]
 > Lembrar de gerar um `.env` na raiz do projeto para configurar as variáveis de ambiente e também gerar suas próprias RSA keys.
 
 #### Gerando um `.env`:
