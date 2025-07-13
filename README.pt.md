@@ -169,6 +169,22 @@ A aplicação tem um sistema de autorização por `ROLE`, por padrão, a aplica�
 | `/consult/all-data`   | `GET`       | Retorna todos os dados de containers cadastrados    |
 
 ---
+
+### Tabela de erros HTTP retornáveis na API
+
+
+| Código HTTP | Exceção                             | Mensagem Retornada                              | Descrição                                                                 |
+|-------------|--------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------|
+| 400         | `BadRequestException`               | `Username already registered.`                  | Quando uma tentativa de registro é feita com um nome de usuário já existente. |
+| 401         | `BadCredentialsException`           | `Bad credentials.`                              | Quando as credenciais fornecidas no login são inválidas.                  |
+| 403         | `AccessDeniedException`             | `User role mismatch.`                           | Quando o usuário não possui permissão para acessar o recurso.            |
+| 400         | `PersistenceException`              | `Failure trying to add/update an ship container.` | Erro ao tentar persistir ou atualizar informações de um container fluvial. |
+| 400         | `NoSuchElementException`            | `Ship container not found.`                     | Quando um container fluvial solicitado não é encontrado no banco.        |
+| 400         | `RuntimeException` (genérica)       | `Some shit happened. Go to see Java console.`   | Exceção genérica não tratada especificamente — verifique os logs.        |
+
+
+---
+
 ### Gerenciar uso de recursos com o Prometheus
 Implementei o `Prometheus` para o gerenciamento de recursos para tomar minhas decisões no deploy da aplicação caso ela fosse para frente.
 

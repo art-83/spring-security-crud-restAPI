@@ -193,6 +193,19 @@ The app has a role-based authorization system. By default, there's a pre-registe
 
 ---
 
+### API Error Handling Table
+
+| HTTP Code | Exception Class              | Returned Message                                 | Description                                                               |
+| --------- | ---------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------- |
+| 400       | `BadRequestException`        | `Username already registered.`                   | Triggered when trying to register a username that already exists.         |
+| 401       | `BadCredentialsException`    | `Bad credentials.`                               | Triggered when login credentials are incorrect.                           |
+| 403       | `AccessDeniedException`      | `User role mismatch.`                            | Triggered when the user's role does not allow access to a specific route. |
+| 400       | `PersistenceException`       | `Failure trying to add/update a ship container.` | Triggered when a container fails to be saved or updated.                  |
+| 400       | `NoSuchElementException`     | `Ship container not found.`                      | Triggered when a container is requested but does not exist in the system. |
+| 400       | `RuntimeException` (generic) | `Unexpected error occurred. Check logs.`         | Catch-all for unhandled exceptions. Check logs for more details.          |
+
+---
+
 ### Resource Usage Management with Prometheus
 
 I implemented `Prometheus` to monitor system resources and support decisions regarding deployment viability.
