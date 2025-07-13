@@ -55,6 +55,7 @@ ___
 #### Requisitos:
 - Docker
 - Docker-compose
+- Maven
 
 #### Clonando o repositório:
 Em um diretório vazio, abra o terminal e digite:

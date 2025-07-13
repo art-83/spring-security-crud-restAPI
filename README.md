@@ -63,6 +63,7 @@ br.devdeloop.uepb\
 
 * Docker
 * Docker-compose
+* Maven
 
 #### Cloning repository:
 In a empty directory, open terminal and digit:
