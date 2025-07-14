@@ -80,25 +80,6 @@ POSTGRES_USER=
 POSTGRES_PASSWORD=
 ```
 
-#### Gerando chaves `RSA`:
-Gere duas RSA keys (2048 bits), uma pública e outra privada, lembrando que a **chave pública** é feita a partir da **chave privada**, pois são conectadas para fazer a operação de criptografia e descriptografia, se atente nesse detalhe ao gerar.\
-\
-Elas devem seguir esse formato:
-```
------BEGIN PRIVATE KEY-----
-// sua chave privada vem aqui.
------END PRIVATE KEY-----
-```
-```
------BEGIN PUBLIC KEY-----
-// sua chave pública vem aqui.
------END PUBLIC KEY-----
-```
-
-Em seguida, renomeie a sua **chave privada** como `jwt.rsa.priv` e sua **chave pública** como `jwt.rsa.pub`\
- \
-Para finalizar, coloque ambas as chaves no diretório `src/main/resources`, essa etapa é importante, pois o referenciamento das chaves no `application.properties` depende de ambas estar nessa pasta.
-
 #### Executando:
 No diretório da aplicação, abra o terminal e digite:
 ```bash

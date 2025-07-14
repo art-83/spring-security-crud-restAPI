@@ -89,26 +89,6 @@ POSTGRES_USER=
 POSTGRES_PASSWORD=
 ```
 
-#### Generating `RSA` Keys:
-
-Generate two RSA keys (2048 bits), one public and one private. Remember that the **public key** is derived from the **private key**, as they are connected for encryption/decryption purposes.
-They must follow this format:
-
-```plaintext
------BEGIN PRIVATE KEY-----
-// your private key here
------END PRIVATE KEY-----
-```
-
-```plaintext
------BEGIN PUBLIC KEY-----
-// your public key here
------END PUBLIC KEY-----
-```
-
-Then rename your **private key** to `jwt.rsa.priv` and your **public key** to `jwt.rsa.pub`.
-Place both in the `src/main/resources` directory. This is important because the `application.properties` references depend on both keys being there.
-
 #### Running the Application:
 
 From the application directory, open a terminal and type:
