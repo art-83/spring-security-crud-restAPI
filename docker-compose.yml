@@ -7,14 +7,14 @@ services:
       - "8080:8080"
     depends_on:
       - database
-    cpus: 0.5
-    mem_limit: 260
+    cpus: 1.0
+    mem_limit: 240mb
     env_file:
       - .env
 
   database:
     image: postgres
-    cpus: 0.35
-    mem_limit: 212
+    cpus: 1.0
+    mem_limit: 240mb
     env_file:
       - .env
