@@ -231,7 +231,7 @@ To stop Prometheus, run the following script from the `/prometheus` directory:
 
 ### Final Remarks and Insights
 
-This was a highly educational project. I'm proud to have created a working prototype with real deployment potential. One interesting note: the `docker-compose.yml` file contains very strict hardware limits. It was designed to run on **AWS Lightsail** using the cheapest plan: **512MB RAM** and **1 CPU**, aiming to support **3 containers** (only 2 are currently defined).
+This was a highly educational project. I'm proud to have created a working prototype with real deployment potential. One interesting note: the `docker-compose.yml` file contains very strict hardware limits. It was designed to run on **AWS Lightsail** using the cheapest plan: **512MB RAM** and **2 CPU**, aiming to support **3 containers** (only 2 are currently defined).
 
 I used `Prometheus` to test load and resource usage. I allocated **240MB** for the API. The `JVM` used about **140MB–170MB**, leaving **240mb** for PostgreSQL and **32** for NGINX (not yet included). Since few requests were expected and the API includes `Spring Security`, load would be minimal. The main limitation would be CPU—sharing **1 thread** between **3 containers** is tough, but I believe it would work in a controlled, low-traffic environment.
 
