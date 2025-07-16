@@ -1,4 +1,5 @@
 .env
+/target
 
 ### IntelliJ IDEA ###
 .idea
