@@ -12,7 +12,7 @@
     <artifactId>uepb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Reicon API</name>
-    <description>API for validation of credentials of Reicon&apos;s employeds and database management.</description>
+    <description>API for validation of credentials of Reicon&apos;s employed and database management.</description>
     <url/>
     <licenses>
         <license/>
