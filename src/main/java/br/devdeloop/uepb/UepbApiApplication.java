@@ -8,5 +8,4 @@ public class UepbApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(UepbApiApplication.class, args);
     }
-
 }

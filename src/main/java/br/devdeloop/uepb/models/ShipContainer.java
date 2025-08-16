@@ -39,4 +39,8 @@ public class ShipContainer {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
+
+    @ManyToOne
+    @JoinColumn(name = "appUser_id")
+    private AppUser appUser;
 }

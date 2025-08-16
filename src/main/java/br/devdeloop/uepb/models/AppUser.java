@@ -4,6 +4,8 @@ import br.devdeloop.uepb.util.AppUserRoleEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "app_users")
@@ -22,4 +24,8 @@ public class AppUser {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private AppUserRoleEnum role;
+
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShipContainer> shipContainers;
+
 }
